@@ -15,6 +15,12 @@
     <description>tpFoyer-17</description>
     <properties>
         <java.version>17</java.version>
+
+
+
+        <sonar.host.url>http://192.168.1.14:9000</sonar.host.url>
+        <sonar.projectKey>Devops2024</sonar.projectKey>
+        <sonar.login>sqp_9424a8e7e4899f05f42be41de1dfa6441d4fa6a3</sonar.login>
     </properties>
     <dependencies>
         <dependency>
@@ -101,11 +107,14 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.10.0.2594</version> <!-- Vérifiez la version la plus récente -->
-            </plugin>
+
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <version>4.0.0.4121</version>
+
+                    </plugin>
+
 
         </plugins>
 
