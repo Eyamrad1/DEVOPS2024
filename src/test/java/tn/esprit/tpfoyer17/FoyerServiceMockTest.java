@@ -5,9 +5,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import tn.esprit.tpfoyer17.entities.Bloc;
+
 import tn.esprit.tpfoyer17.entities.Foyer;
-import tn.esprit.tpfoyer17.entities.Universite;
+
 import tn.esprit.tpfoyer17.repositories.BlocRepository;
 import tn.esprit.tpfoyer17.repositories.FoyerRepository;
 import tn.esprit.tpfoyer17.repositories.UniversiteRepository;
@@ -106,23 +106,5 @@ import static org.mockito.Mockito.*;
         verify(foyerRepository, times(1)).deleteById(1L);
     }
 
-   /* @Test
-     void testAjouterFoyerEtAffecterAUniversite() {
-        // Arrange
-        Foyer foyer = new Foyer();
-        Universite universite = new Universite();
-        universite.setIdUniversite(1L);
-        when(foyerRepository.save(any(Foyer.class))).thenReturn(foyer);
-        when(universiteRepository.findById(1L)).thenReturn(Optional.of(universite));
-        doNothing().when(blocRepository).save(any(Bloc.class));
 
-        // Act
-        Foyer result = foyerService.ajouterFoyerEtAffecterAUniversite(foyer, 1L);
-
-        // Assert
-        assertNotNull(result);
-        assertEquals(foyer, result);
-        verify(blocRepository, times(1)).save(any(Bloc.class));
-        verify(universiteRepository, times(1)).save(universite);
-    }*/
 }

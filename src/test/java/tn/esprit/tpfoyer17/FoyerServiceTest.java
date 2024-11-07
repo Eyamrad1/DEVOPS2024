@@ -119,32 +119,5 @@ class FoyerServiceTest {
         assertNull(foyerRepository.findById(foyer.getIdFoyer()).orElse(null));
     }
 
-    /*@Test
-    void testAjouterFoyerEtAffecterAUniversite() {
-        // Arrange: Create a new Universite and Foyer to set up the test environment
-        Universite universites = new Universite();
-        universites.setIdUniversite(1L);
-        universites.setNomUniversite("University A");
-        universiteRepository.save(universites); // Save the university to the database
 
-        Foyer newFoyer = new Foyer();
-        newFoyer.setIdFoyer(2L);
-        newFoyer.setNomFoyer("Foyer B");
-        newFoyer.setCapaciteFoyer(150);
-        // Optionally set other properties
-
-        // Act: Add the foyer and associate it with the university
-        Foyer result = foyerService.ajouterFoyerEtAffecterAUniversite(newFoyer, universites.getIdUniversite());
-
-        // Assert: Verify the foyer and university association
-        assertNotNull(result); // Make sure the result is not null
-        assertEquals("Foyer B", result.getNomFoyer()); // Ensure the Foyer's name is correct
-        assertNotNull(result.getUniversite()); // Ensure the Foyer is associated with a Universite
-        assertEquals("University A", result.getUniversite().getNomUniversite()); // Verify the Universite name
-
-        // Verify the actual saving of the foyer
-        Foyer savedFoyer = foyerRepository.findById(result.getIdFoyer()).orElse(null);
-        assertNotNull(savedFoyer); // Ensure the foyer is saved
-        assertEquals("Foyer B", savedFoyer.getNomFoyer()); // Verify the saved Foyer has the correct name
-    }*/
 }
