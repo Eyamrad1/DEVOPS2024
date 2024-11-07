@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:latest
+    container_name: db
+    restart: unless-stopped
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "1" # Changed to correct YAML format
+      MYSQL_DATABASE: Foyer
+    ports:
+      - "3308:3306"
+    volumes:
+      - db:/var/lib/mysql
+
+  springapp:
+    image: mradeya/tpfoyer:latest
+    container_name: springapp
+    restart: on-failure
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/Foyer?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    depends_on:
+      - db
+
+volumes:
+  db:

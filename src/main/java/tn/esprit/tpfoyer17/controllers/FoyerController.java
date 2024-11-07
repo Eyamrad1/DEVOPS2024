@@ -32,7 +32,7 @@ public class FoyerController {
     public Foyer retrieveFoyer(@PathVariable("idFoyer") long idFoyer) {
         return foyerService.retrieveFoyer(idFoyer);
     }
-@DeleteMapping("/removeFoyer")
+@DeleteMapping("/removeFoyer/{idFoyer}")
     public void removeFoyer(@PathVariable("idFoyer") long idFoyer) {
         foyerService.removeFoyer(idFoyer);
     }
