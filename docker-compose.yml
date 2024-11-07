@@ -1,26 +1,40 @@
-version: "3.9"
+version: '3.8'
 
 services:
-  db:
-    image: mysql:latest
-    container_name: db
-    restart: unless-stopped
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "1"
-      MYSQL_DATABASE: foyer
+  spring-foyer:
+    image: mradeya/tpfoyer_image  # Replace with your image name in Docker Hub
+    container_name: tpfoyer-app
+    build: .  # This will build your Spring Boot app from the current directory
     ports:
-      - "3306:3306"  # Exposes MySQL on host's port 3306
-    volumes:
-      - db:/var/lib/mysql
-
-  springapp:
-    image: mradeya/tpfoyer:latest
-    container_name: springapp
-    restart: on-failure
+      - "8082:8082"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/Foyer?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/Foyer?useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: rootpassword
     depends_on:
-      - db
+      - mysqldb  # Ensures mysql starts before the app
+    networks:
+      - app-network
+
+  mysqldb:
+    image: mysql:8
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: Foyer
+      MYSQL_USER: root
+      MYSQL_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql  # Persistent volume for MySQL data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
-  db:
+  mysql-data:
+    driver: local
