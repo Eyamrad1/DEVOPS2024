@@ -18,6 +18,8 @@
     <properties>
         <sonar.jacoco.reportPaths>target/jacoco.exec</sonar.jacoco.reportPaths>
         <sonar.junit.reportPaths>target/test-*.xml</sonar.junit.reportPaths>
+
+
         <java.version>17</java.version>
     </properties>
 
@@ -51,10 +53,26 @@
             <version>1.18.24</version>
             <optional>true</optional>
         </dependency>
+
+        <!-- Spring Boot Starter Test with exclusion if needed -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <!-- Exclude Mockito here if you need to add a custom version -->
+                <exclusion>
+                    <groupId>org.mockito</groupId>
+                    <artifactId>mockito-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Optional: Mockito Core, specify version if needed -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>4.0.0</version>
+            <version>4.0.0</version> <!-- Add version if excluding from spring-boot-starter-test -->
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -73,20 +91,20 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
+                <version>0.8.7</version> <!-- Use the latest version of JaCoCo -->
                 <executions>
                     <execution>
-                        <id>prepare-agent</id>
+                        <id>prepare-agent</id> <!-- Unique id for the first execution -->
                         <goals>
-                            <goal>prepare-agent</goal>
+                            <goal>prepare-agent</goal> <!-- Prepare the JaCoCo agent -->
                         </goals>
                     </execution>
                     <execution>
-                        <id>generate-report</id>
+                        <id>generate-report</id> <!-- Unique id for the second execution -->
                         <goals>
-                            <goal>report</goal>
+                            <goal>report</goal> <!-- Generate the coverage report -->
                         </goals>
-                        <phase>verify</phase>
+                        <phase>verify</phase> <!-- Run the coverage report in the verify phase -->
                     </execution>
                 </executions>
             </plugin>
