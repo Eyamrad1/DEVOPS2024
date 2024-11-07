@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   spring-foyer:
-    image: mradeya/tpfoyer_image  # Replace with your image name in Docker Hub
+    image: mradeya/tpfoyer  # Replace with your image name in Docker Hub
     container_name: tpfoyer-app
     build: .  # This will build your Spring Boot app from the current directory
     ports:
