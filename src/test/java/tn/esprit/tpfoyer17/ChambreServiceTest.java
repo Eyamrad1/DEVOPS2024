@@ -178,4 +178,27 @@ public class ChambreServiceTest {
         Assertions.assertEquals(1, result.size());
         Assertions.assertEquals(TypeChambre.DOUBLE, result.get(0).getTypeChambre());
     }
+    @Test
+    @Order(8)
+    void testAffecterChambresABloc() {
+        // Given
+        Bloc bloc = createBloc();
+        bloc = blocRepository.save(bloc);
+
+        Chambre chambre1 = createChambre(TypeChambre.SIMPLE);
+        Chambre chambre2 = createChambre(TypeChambre.DOUBLE);
+        chambre1 = chambreRepository.save(chambre1);
+        chambre2 = chambreRepository.save(chambre2);
+
+        List<Long> chambresIds = List.of(chambre1.getNumeroChambre(), chambre2.getNumeroChambre());
+
+        // When
+        Bloc result = chambreService.affecterChambresABloc(chambresIds, bloc.getIdBloc());
+
+        // Then
+        Assertions.assertNotNull(result);
+        List<Chambre> chambresAffectees = chambreRepository.findByBlocIdBloc(bloc.getIdBloc());
+        Assertions.assertEquals(2, chambresAffectees.size());
+    }
+
 }
