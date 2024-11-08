@@ -112,7 +112,7 @@
                     <configuration>
                         <!-- Generates both HTML and XML reports -->
                         <outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
-                        <output>both</output>
+                        <output>file</output>
                         <!-- This generates both reports -->
                     </configuration>
                 </plugin>
