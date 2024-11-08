@@ -3,20 +3,21 @@ package tn.esprit.tpfoyer17;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import tn.esprit.tpfoyer17.entities.Bloc;
 import tn.esprit.tpfoyer17.repositories.BlocRepository;
 import tn.esprit.tpfoyer17.services.impementations.BlocService;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
+@ExtendWith(MockitoExtension.class)
 @Slf4j
 class BlocServiceTest {
 
@@ -98,6 +99,19 @@ class BlocServiceTest {
 
         // Assert
         verify(blocRepository, times(1)).deleteById(idBloc);
+    }
+    @Test
+    void testRetrieveNonExistentBloc() {
+        // Arrange
+        when(blocRepository.findById(99L)).thenReturn(Optional.empty());
+
+        // Act
+        Bloc foundBloc = blocService.retrieveBloc(99L);
+
+        // Assert
+        assertNull(foundBloc);
+        verify(blocRepository, times(1)).findById(99L);
+        verifyNoMoreInteractions(blocRepository);
     }
 
 }
