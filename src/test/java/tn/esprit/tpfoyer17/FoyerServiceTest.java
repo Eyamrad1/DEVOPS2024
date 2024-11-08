@@ -21,7 +21,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@SpringBootTest
+@SpringBootTest(classes = TpFoyer17Application.class)
+
 
 @Slf4j
 class FoyerServiceTest {
