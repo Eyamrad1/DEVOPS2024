@@ -16,8 +16,8 @@
     <description>tpFoyer-17</description>
 
     <properties>
-        <sonar.jacoco.reportPaths>target/jacoco.exec</sonar.jacoco.reportPaths>
-        <sonar.junit.reportPaths>target/test-*.xml</sonar.junit.reportPaths>
+        <!-- Updated property for XML report path -->
+        <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/jacoco-report/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <java.version>17</java.version>
     </properties>
 
@@ -88,7 +88,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.10</version> <!-- Updated to the latest version -->
+                <version>0.8.10</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -105,7 +105,10 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <!-- Enabling XML report generation -->
                     <outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
+                    <dataFile>${project.build.directory}/jacoco.exec</dataFile>
+                    <output>both</output> <!-- both HTML and XML reports -->
                 </configuration>
             </plugin>
 
