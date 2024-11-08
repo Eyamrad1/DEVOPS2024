@@ -16,9 +16,12 @@
     <description>tpFoyer-17</description>
 
     <properties>
-        <!-- Updated property for XML report path -->
         <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/jacoco-report/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+
+        <sonar.junit.reportPaths>target/test-*.xml</sonar.junit.reportPaths>
         <java.version>17</java.version>
+
+
     </properties>
 
     <dependencies>
@@ -84,33 +87,35 @@
 
     <build>
         <plugins>
-            <!-- JaCoCo Plugin for Code Coverage -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.10</version>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <phase>verify</phase>
-                    </execution>
-                </executions>
-                <configuration>
-                    <!-- Enabling XML report generation -->
-                    <outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
-                    <dataFile>${project.build.directory}/jacoco.exec</dataFile>
-                    <output>both</output> <!-- both HTML and XML reports -->
-                </configuration>
-            </plugin>
+
+
+                <!-- JaCoCo Plugin for Code Coverage -->
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.10</version>
+                    <executions>
+                        <execution>
+                            <id>prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>report</id>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                            <phase>verify</phase>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <!-- Generates both HTML and XML reports -->
+                        <outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
+                        <output>both</output>
+                        <!-- This generates both reports -->
+                    </configuration>
+                </plugin>
 
             <!-- Spring Boot Maven Plugin -->
             <plugin>
