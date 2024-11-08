@@ -18,8 +18,6 @@
     <properties>
         <sonar.jacoco.reportPaths>target/jacoco.exec</sonar.jacoco.reportPaths>
         <sonar.junit.reportPaths>target/test-*.xml</sonar.junit.reportPaths>
-
-
         <java.version>17</java.version>
     </properties>
 
@@ -60,7 +58,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
             <exclusions>
-                <!-- Exclude Mockito here if you need to add a custom version -->
                 <exclusion>
                     <groupId>org.mockito</groupId>
                     <artifactId>mockito-core</artifactId>
@@ -72,7 +69,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>4.0.0</version> <!-- Add version if excluding from spring-boot-starter-test -->
+            <version>4.0.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -91,22 +88,25 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version> <!-- Use the latest version of JaCoCo -->
+                <version>0.8.10</version> <!-- Updated to the latest version -->
                 <executions>
                     <execution>
-                        <id>prepare-agent</id> <!-- Unique id for the first execution -->
+                        <id>prepare-agent</id>
                         <goals>
-                            <goal>prepare-agent</goal> <!-- Prepare the JaCoCo agent -->
+                            <goal>prepare-agent</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>generate-report</id> <!-- Unique id for the second execution -->
+                        <id>report</id>
                         <goals>
-                            <goal>report</goal> <!-- Generate the coverage report -->
+                            <goal>report</goal>
                         </goals>
-                        <phase>verify</phase> <!-- Run the coverage report in the verify phase -->
+                        <phase>verify</phase>
                     </execution>
                 </executions>
+                <configuration>
+                    <outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
+                </configuration>
             </plugin>
 
             <!-- Spring Boot Maven Plugin -->
