@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 @Slf4j
-@FieldDefaults(level = AccessLevel.PRIVATE)
+
 public class FoyerService implements IFoyerService {
     FoyerRepository foyerRepository;
     BlocRepository blocRepository;
