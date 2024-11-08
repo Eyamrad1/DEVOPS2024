@@ -1,6 +1,5 @@
 package tn.esprit.tpfoyer17;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,13 +14,14 @@ import tn.esprit.tpfoyer17.repositories.FoyerRepository;
 import tn.esprit.tpfoyer17.repositories.UniversiteRepository;
 import tn.esprit.tpfoyer17.services.impementations.FoyerService;
 
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@SpringBootTest
+@SpringBootTest(classes = TpFoyer17Application.class)
 @Slf4j
 class FoyerServiceTest {
 
@@ -38,29 +38,35 @@ class FoyerServiceTest {
     private BlocRepository blocRepository;
 
     private Foyer foyer;
-     Universite universite;
-    Bloc bloc;
+    private Universite universite;
+    private Bloc bloc;
 
     @BeforeEach
     void setUp() {
-        // Arrange: Setup entities for each test
-        universite = universiteRepository.save(new Universite(1L, "University A", "Some Address", null));
-        foyer = foyerRepository.save(new Foyer(1L, "Foyer A", 100, null, null));  // Use the constructor with parameters
+        // Setup Universite entity
+        universite = new Universite(1L, "University A", "Some Address", null);
+        universite = universiteRepository.save(universite);
+
+        // Setup Foyer entity
+        foyer = new Foyer(1L, "Foyer A", 100, null, null);
+        foyer = foyerRepository.save(foyer);
+
+        // Setup Bloc entity associated with the foyer
+        bloc = new Bloc(0L, "Bloc A", 50, foyer, null); // Adjusted constructor to use all fields
+        bloc = blocRepository.save(bloc);
     }
 
     @AfterEach
     void tearDown() {
-        // Clean up the database after each test
+        // Clean up database after each test
+        blocRepository.deleteAll();
         foyerRepository.deleteAll();
         universiteRepository.deleteAll();
-        blocRepository.deleteAll();
     }
 
     @Test
+    @Order(1)
     void testRetrieveAllFoyers() {
-        // Arrange: Ensure the database has some foyers to retrieve
-        foyerRepository.save(new Foyer(2L, "Foyer B", 200, null, null)); // This ensures that there are multiple foyers
-
         // Act: Call the method under test
         List<Foyer> foyers = foyerService.retrieveAllFoyers();
 
@@ -71,9 +77,10 @@ class FoyerServiceTest {
     }
 
     @Test
+    @Order(2)
     void testAddFoyer() {
-        // Arrange: Prepare a new foyer object to add using the correct constructor
-        Foyer newFoyer = new Foyer(2L, "New Foyer", 100, null, null); // Use the correct constructor
+        // Prepare a new foyer object to add
+        Foyer newFoyer = new Foyer(2L, "New Foyer", 100, null, null);
 
         // Act: Add the new foyer
         Foyer result = foyerService.addFoyer(newFoyer);
@@ -81,11 +88,13 @@ class FoyerServiceTest {
         // Assert: Verify the result
         assertNotNull(result);
         assertEquals("New Foyer", result.getNomFoyer());
+        assertEquals(100, result.getCapaciteFoyer());
     }
 
     @Test
+    @Order(3)
     void testUpdateFoyer() {
-        // Arrange: Update the existing foyer with new values
+        // Update the existing foyer with new values
         foyer.setNomFoyer("Updated Foyer");
 
         // Act: Update the foyer in the database
@@ -97,27 +106,36 @@ class FoyerServiceTest {
     }
 
     @Test
+    @Order(4)
     void testRetrieveFoyer() {
-        // Arrange: Ensure the foyer is already in the database (this should already be the case due to @BeforeEach)
+        // Act: Retrieve the foyer by ID
+        Foyer retrievedFoyer = foyerService.retrieveFoyer(foyer.getIdFoyer());
 
-        // Act: Retrieve the foyer using its ID
-        Foyer result = foyerService.retrieveFoyer(foyer.getIdFoyer());
-
-        // Assert: Verify the retrieved foyer matches the expected name
-        assertNotNull(result);
-        assertEquals("Foyer A", result.getNomFoyer());
+        // Assert: Verify the retrieved foyer
+        assertNotNull(retrievedFoyer);
+        assertEquals("Foyer A", retrievedFoyer.getNomFoyer());
     }
 
     @Test
+    @Order(5)
     void testRemoveFoyer() {
-        // Arrange: Ensure the foyer is in the repository before removal (it should be from @BeforeEach)
-
         // Act: Remove the foyer by its ID
         foyerService.removeFoyer(foyer.getIdFoyer());
 
         // Assert: Verify that the foyer is no longer in the repository
-        assertNull(foyerRepository.findById(foyer.getIdFoyer()).orElse(null));
+        assertFalse(foyerRepository.existsById(foyer.getIdFoyer()));
     }
 
 
+
+
+
+    @Test
+    @Order(7)
+    void testFoyerAndBlocRelationship() {
+        // Ensure the bloc is properly associated with the foyer
+        Bloc savedBloc = blocRepository.findById(bloc.getIdBloc()).orElse(null);
+        assertNotNull(savedBloc);
+        assertEquals(foyer.getIdFoyer(), savedBloc.getFoyer().getIdFoyer());
+    }
 }
