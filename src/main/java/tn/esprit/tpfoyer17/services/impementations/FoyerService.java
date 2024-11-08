@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.tpfoyer17.entities.Bloc;
 import tn.esprit.tpfoyer17.entities.Foyer;
 import tn.esprit.tpfoyer17.entities.Universite;
+import tn.esprit.tpfoyer17.exceptions.ResourceNotFoundException;
 import tn.esprit.tpfoyer17.repositories.BlocRepository;
 import tn.esprit.tpfoyer17.repositories.FoyerRepository;
 import tn.esprit.tpfoyer17.repositories.UniversiteRepository;
@@ -32,6 +33,9 @@ public class FoyerService implements IFoyerService {
 
     @Override
     public Foyer addFoyer(Foyer f) {
+        if (f == null) {
+            throw new IllegalArgumentException("Foyer cannot be null");
+        }
         return foyerRepository.save(f);
     }
 
@@ -42,8 +46,10 @@ public class FoyerService implements IFoyerService {
 
     @Override
     public Foyer retrieveFoyer(long idFoyer) {
-        return foyerRepository.findById(idFoyer).orElse(null);
+        return foyerRepository.findById(idFoyer)
+                .orElseThrow(() -> new ResourceNotFoundException("Foyer not found with id: " + idFoyer));
     }
+
 
     @Override
     public void removeFoyer(long idFoyer) {

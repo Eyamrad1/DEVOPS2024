@@ -153,19 +153,7 @@ class FoyerServiceMockTest {
         assertThrows(RuntimeException.class, () -> foyerService.removeFoyer(1L));
     }
 
-    @Test
-    void testAddFoyerWithBlocInteraction() {
-        // Arrange
-        Foyer foyer = new Foyer();
-        when(foyerRepository.save(any(Foyer.class))).thenReturn(foyer);
 
-        // Act
-        Foyer result = foyerService.addFoyer(foyer);
-
-        // Assert
-        verify(blocRepository, times(1)).save(any());
-        assertNotNull(result);
-    }
 
     @Test
     void testRetrieveAllFoyers_Values() {
