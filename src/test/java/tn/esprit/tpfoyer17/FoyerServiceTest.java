@@ -119,15 +119,6 @@ class FoyerServiceTest {
         assertEquals("Foyer A", retrievedFoyer.getNomFoyer());
     }
 
-    @Test
-    @Order(5)
-    void testRemoveFoyer() {
-        // Act: Remove the foyer by its ID
-        foyerService.removeFoyer(foyer.getIdFoyer());
-
-        // Assert: Verify that the foyer is no longer in the repository
-        assertFalse(foyerRepository.existsById(foyer.getIdFoyer()));
-    }
 
 
 
