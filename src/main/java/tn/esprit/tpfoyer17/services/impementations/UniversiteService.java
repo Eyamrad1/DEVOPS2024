@@ -57,4 +57,22 @@ public class UniversiteService implements IUniversiteService {
         return universiteRepository.save(universite);
 
     }
+
+
+    // Nouvelle méthode de suppression
+    @Override
+    public void deleteUniversity(long idUniversity) {
+        Universite universite = universiteRepository.findById(idUniversity).orElse(null);
+        if (universite != null) {
+            // Si un foyer est associé, on le désaffecte avant de supprimer l'université
+            if (universite.getFoyer() != null) {
+                universite.setFoyer(null);
+                universiteRepository.save(universite);
+            }
+            universiteRepository.deleteById(idUniversity);
+            log.info("Université avec l'ID {} supprimée avec succès.", idUniversity);
+        } else {
+            log.warn("Université avec l'ID {} introuvable.", idUniversity);
+        }
+    }
 }
