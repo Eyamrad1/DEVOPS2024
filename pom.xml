@@ -16,34 +16,47 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
+        <!-- Spring Boot Starter Data JPA (Hibernate et JPA) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
+        <!-- Spring Boot Starter Web (pour les applications web, REST APIs, etc.) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- Springdoc OpenAPI pour la génération automatique de la documentation d'API REST avec Swagger UI -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.0.0</version>
         </dependency>
+
+        <!-- Spring Boot DevTools pour un développement plus rapide (rechargement automatique) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
+
+        <!-- Connecteur JDBC MySQL pour la connexion à la base de données MySQL -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- Lombok pour éviter la répétition du code pour les getters, setters, etc. -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version> <!-- Add a version here -->
+            <version>1.18.24</version> <!-- Version à spécifier -->
             <optional>true</optional>
         </dependency>
+
+        <!-- Dépendance pour les tests (Spring Boot Starter Test) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -61,6 +74,7 @@
 
     <build>
         <plugins>
+            <!-- Plugin Spring Boot Maven pour la gestion du packaging et du déploiement -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
