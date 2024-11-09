@@ -1,5 +1,6 @@
 package tn.esprit.tpfoyer17;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
 @Slf4j
+@Transactional
 class FoyerServiceTest {
 
     @Autowired

@@ -1,13 +1,15 @@
 package tn.esprit.tpfoyer17;
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 
 
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import tn.esprit.tpfoyer17.entities.Foyer;
 import tn.esprit.tpfoyer17.repositories.BlocRepository;
 import tn.esprit.tpfoyer17.repositories.FoyerRepository;
@@ -23,15 +25,16 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest(classes = TpFoyer17Application.class)
+@Transactional
 class FoyerServiceMockTest {
 
-    @Mock
+    @MockBean
     private FoyerRepository foyerRepository;
 
-    @Mock
+    @MockBean
     private BlocRepository blocRepository;
 
-    @Mock
+    @MockBean
     private UniversiteRepository universiteRepository;
 
     @InjectMocks
