@@ -54,11 +54,7 @@
             <version>1.18.24</version>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+
 
         <!-- Spring Boot Starter Test with exclusion if needed -->
         <dependency>
@@ -108,7 +104,7 @@
                         </goals>
                     </execution>
                 </executions>
-           
+
                     <configuration>
                         <!-- Generates both HTML and XML reports -->
                         <outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
