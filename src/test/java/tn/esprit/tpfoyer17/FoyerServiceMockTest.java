@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+
 import tn.esprit.tpfoyer17.entities.Foyer;
 import tn.esprit.tpfoyer17.repositories.BlocRepository;
 import tn.esprit.tpfoyer17.repositories.FoyerRepository;
@@ -25,16 +25,16 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 
-@Transactional
+
 class FoyerServiceMockTest {
 
-    @MockBean
+    @Mock
     private FoyerRepository foyerRepository;
 
-    @MockBean
+    @Mock
     private BlocRepository blocRepository;
 
-    @MockBean
+    @Mock
     private UniversiteRepository universiteRepository;
 
     @InjectMocks
