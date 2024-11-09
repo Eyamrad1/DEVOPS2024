@@ -1,5 +1,6 @@
 package tn.esprit.tpfoyer17.services.impementations;
 
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -49,7 +50,7 @@ public class UniversiteService implements IUniversiteService {
         return  universiteRepository.save(universite);
     }
 
-    @Override
+    @Transactional
     public Universite affecterFoyerAUniversite(long idFoyer, String nomUniversite) {
         Foyer foyer = foyerRepository.findById(idFoyer).orElse(null);
         Universite universite = universiteRepository.findByNomUniversiteLike(nomUniversite);
