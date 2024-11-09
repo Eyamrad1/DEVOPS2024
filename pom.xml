@@ -18,7 +18,7 @@
 
 
 
-        <sonar.host.url>http://192.168.100.229:9000</sonar.host.url>
+        <sonar.host.url>http://192.168.1.12:9000</sonar.host.url>
         <sonar.projectKey>Devops2024</sonar.projectKey>
         <sonar.login>sqp_9424a8e7e4899f05f42be41de1dfa6441d4fa6a3</sonar.login>
     </properties>
