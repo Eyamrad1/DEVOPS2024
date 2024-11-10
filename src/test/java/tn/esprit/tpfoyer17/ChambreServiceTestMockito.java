@@ -25,7 +25,8 @@ import static org.mockito.Mockito.*;
 
 /**
  * Classe de test unitaire pour le service Chambre, utilisant Mockito pour simuler le comportement du repository.
- */@SpringBootTest
+ */
+@SpringBootTest
 
 @ExtendWith(MockitoExtension.class)  // Extension de Mockito pour injecter les mocks automatiquement
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)  // Permet d'exécuter les tests dans un ordre spécifique
