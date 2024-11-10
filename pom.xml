@@ -16,9 +16,7 @@
     <description>tpFoyer-17</description>
 
     <properties>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/jacoco-report/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 
-        <sonar.junit.reportPaths>target/test-*.xml</sonar.junit.reportPaths>
         <java.version>17</java.version>
 
 
@@ -89,29 +87,36 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>4.0.0.4121</version>
 
+            </plugin>
 
-                <!-- JaCoCo Plugin for Code Coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.10</version>
+                <version>0.8.12</version>
+
                 <executions>
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
                             <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
 
-                    <configuration>
-                        <!-- Generates both HTML and XML reports -->
-                        <outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
-                        <output>file</output>
-                        <!-- This generates both reports -->
-                    </configuration>
-                </plugin>
+                <!-- JaCoCo Plugin for Code Coverage -->
+
 
             <!-- Surefire Plugin for Unit Tests -->
             <plugin>

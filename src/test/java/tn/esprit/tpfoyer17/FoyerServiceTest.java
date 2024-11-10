@@ -127,7 +127,7 @@ class FoyerServiceTest {
 
 
     @Test
-    @Order(7)
+    @Order(5)
     void testFoyerAndBlocRelationship() {
         // Ensure the bloc is properly associated with the foyer
         Bloc savedBloc = blocRepository.findById(bloc.getIdBloc()).orElse(null);
