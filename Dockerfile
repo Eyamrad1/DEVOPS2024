@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/tpFoyer-17-0.0.1.jar /app/tpFoyer-17-0.0.1.jar
 
 # Exposer le port sur lequel l'application écoute
-EXPOSE 8081
+EXPOSE 8082
 
 # Commande pour exécuter l'application
 ENTRYPOINT ["java", "-jar", "tpFoyer-17-0.0.1.jar"]
