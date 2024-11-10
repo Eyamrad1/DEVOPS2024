@@ -7,7 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tn.esprit.tpfoyer17.entities.Bloc;
 import tn.esprit.tpfoyer17.repositories.BlocRepository;
@@ -17,6 +16,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 @ExtendWith(MockitoExtension.class)
 @Slf4j
 class BlocServiceTest {
@@ -27,16 +27,11 @@ class BlocServiceTest {
     @Mock
     BlocRepository blocRepository;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
-
     @Test
     void testRetrieveBloc() {
         // Arrange
         Bloc bloc = Bloc.builder()
-                .idBloc(1L) // Initialisation dans le builder si l'ID est pris en compte
+                .idBloc(1L)
                 .nomBloc("Bloc A")
                 .build();
         when(blocRepository.findById(1L)).thenReturn(Optional.of(bloc));
@@ -49,6 +44,7 @@ class BlocServiceTest {
         assertEquals("Bloc A", foundBloc.getNomBloc());
         verify(blocRepository, times(1)).findById(1L);
     }
+
     @Test
     void testAddBloc() {
         // Arrange
@@ -56,7 +52,7 @@ class BlocServiceTest {
                 .nomBloc("Bloc B")
                 .capaciteBloc(100L)
                 .build();
-        Mockito.when(blocRepository.save(Mockito.any(Bloc.class))).thenReturn(bloc);
+        when(blocRepository.save(any(Bloc.class))).thenReturn(bloc);
 
         // Act
         Bloc result = blocService.addBloc(bloc);
@@ -76,7 +72,7 @@ class BlocServiceTest {
                 .nomBloc("Bloc C")
                 .capaciteBloc(150L)
                 .build();
-        Mockito.when(blocRepository.save(Mockito.any(Bloc.class))).thenReturn(bloc);
+        when(blocRepository.save(any(Bloc.class))).thenReturn(bloc);
 
         // Act
         Bloc updatedBloc = blocService.updateBloc(bloc);
@@ -87,10 +83,10 @@ class BlocServiceTest {
         assertEquals(150L, updatedBloc.getCapaciteBloc());
         verify(blocRepository, times(1)).save(bloc);
     }
+
     @Test
     void testRemoveBloc() {
         // Arrange
-        log.info("ddd");
         long idBloc = 3L;
         doNothing().when(blocRepository).deleteById(idBloc);
 
@@ -100,6 +96,7 @@ class BlocServiceTest {
         // Assert
         verify(blocRepository, times(1)).deleteById(idBloc);
     }
+
     @Test
     void testRetrieveNonExistentBloc() {
         // Arrange
@@ -113,5 +110,4 @@ class BlocServiceTest {
         verify(blocRepository, times(1)).findById(99L);
         verifyNoMoreInteractions(blocRepository);
     }
-
 }
