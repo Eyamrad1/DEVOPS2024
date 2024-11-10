@@ -4,10 +4,10 @@ services:
   mysql-container:
     image: mysql:8
     environment:
-      MYSQL_ROOT_PASSWORD:
+      MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: tpFoyer17
       MYSQL_USER: root
-      MYSQL_PASSWORD:
+      MYSQL_PASSWORD: rootpassword
     ports:
       - "3306:3306"
     volumes:
@@ -20,7 +20,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/tpFoyer17
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD:
+      SPRING_DATASOURCE_PASSWORD: rootpassword
     ports:
       - "8082:8082"
     depends_on:
