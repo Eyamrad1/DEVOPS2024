@@ -1,13 +1,13 @@
-# Étape 1 : Construire l'application
-FROM maven:3.8.5-openjdk-17 AS build
-WORKDIR /app
-COPY tpFoyer-17/pom.xml .
-COPY tpFoyer-17/src ./src
-RUN mvn clean package -DskipTests
 
-# Étape 2 : Exécuter l'application
+# Step 2: Run the application
 FROM openjdk:17
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+
+# Copy the jar file from the target folder into the container
+COPY target/tpFoyer-17-0.0.1.jar /app/tpFoyer-17-0.0.1.jar
+
+# Expose the port the app runs on
 EXPOSE 8082
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# Run the Spring Boot application
+ENTRYPOINT ["java", "-jar", "/app/tpFoyer-17.jar"]

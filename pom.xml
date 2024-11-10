@@ -18,9 +18,9 @@
 
 
 
-        <sonar.host.url>http://192.168.43.44:9000</sonar.host.url>
+        <sonar.host.url>http://192.168.1.19:9000</sonar.host.url>
         <sonar.projectKey>DevOps2024</sonar.projectKey>
-        <sonar.login>sqa_95c86f777f1353e98a4a6c509e151de61ddb9ce3</sonar.login>
+        <sonar.login>sqa_19e9d20d62e5783960318de7873145a8b89962f7</sonar.login>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 
     </properties>
@@ -120,6 +120,7 @@
 
 
         </plugins>
+
 
 
 
