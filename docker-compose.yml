@@ -3,6 +3,7 @@ version: '3.8'
 services:
   mysql-container:
     image: mysql:8
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword  # Définir le mot de passe du root
       MYSQL_DATABASE: tpFoyer17  # Créer la base de données tpFoyer17
@@ -15,14 +16,12 @@ services:
     build:
       context: .  # Utiliser le Dockerfile dans le répertoire actuel
       dockerfile: Dockerfile
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/tpFoyer17  # URL de connexion à la base de données
-      SPRING_DATASOURCE_USERNAME: root  # Utilisateur root pour la connexion
-      SPRING_DATASOURCE_PASSWORD: rootpassword  # Mot de passe du root
+    image:  amine_lahmer-springboot-container
+    restart: on-failure
     ports:
       - "8082:8082"  # Exposer le port Spring Boot
     depends_on:
       - mysql-container  # Attendre que MySQL démarre avant Spring Boot
-
+    tty: true
 volumes:
-  mysql_data:  # Volume persistant pour MySQL
+  db:  # Volume persistant pour MySQL

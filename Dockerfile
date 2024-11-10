@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /app
 
 # Copier le fichier JAR généré dans l'image Docker
-COPY target/tpFoyer-17-0.0.1.jar /app/tpFoyer-17-0.0.1.jar
+COPY target/tpFoyer-17-0.0.1.jar tpFoyer-17-0.0.1.jar
 
 # Exposer le port sur lequel l'application écoute
 EXPOSE 8082
