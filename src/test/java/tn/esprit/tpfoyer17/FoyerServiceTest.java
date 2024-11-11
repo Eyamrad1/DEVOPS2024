@@ -131,7 +131,7 @@ class FoyerServiceTest {
         assertEquals(foyer.getIdFoyer(), savedBloc.getFoyer().getIdFoyer());
     }
 
-    
+
 
     @Test
     @Order(7)
