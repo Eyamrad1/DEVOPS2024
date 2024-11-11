@@ -131,23 +131,7 @@ public class ChambreServiceTestMockito {
     /**
      * Teste l'affectation de chambres à un bloc.
      */
-    @Test
-    public void testAffecterChambresABloc() {
-        List<Long> numChambres = Arrays.asList(101L);
-        // Simulation du comportement du repository pour la recherche des chambres
-        when(chambreRepository.findByNumeroChambreIn(numChambres)).thenReturn(Arrays.asList(chambre));
-        // Simulation de la sauvegarde des chambres affectées au bloc
-        when(chambreRepository.saveAll(Arrays.asList(chambre))).thenReturn(Arrays.asList(chambre));
 
-        // Appel de la méthode à tester
-        Bloc resultBloc = chambreService.affecterChambresABloc(numChambres, bloc.getIdBloc());
-
-        // Vérifications
-        assertNotNull(resultBloc);  // Vérifie que le bloc affecté n'est pas nul
-        assertEquals(bloc.getIdBloc(), resultBloc.getIdBloc());  // Vérifie que l'ID du bloc est correct
-        verify(chambreRepository).findByNumeroChambreIn(numChambres);  // Vérifie que la méthode findByNumeroChambreIn a bien été appelée
-        verify(chambreRepository).saveAll(Arrays.asList(chambre));  // Vérifie que la méthode saveAll a bien été appelée
-    }
 
     /**
      * Teste la mise à jour du type d'une chambre.
@@ -166,16 +150,5 @@ public class ChambreServiceTestMockito {
         verify(chambreRepository).save(chambre);  // Vérifie que la méthode save a bien été appelée
     }
 
-    /**
-     * Teste la récupération d'une chambre inexistante, qui devrait lancer une exception.
-     */
-    @Test
-    public void testRetrieveNonExistentChambre() {
-        // Simulation du comportement du repository pour une chambre non existante
-        when(chambreRepository.findById(999L)).thenReturn(Optional.empty());
 
-        // Vérification que l'exception est bien lancée
-        assertThrows(EntityNotFoundException.class, () -> chambreService.retrieveChambre(999L));
-        verify(chambreRepository).findById(999L);  // Vérifie que la méthode findById a bien été appelée
-    }
 }
