@@ -1,4 +1,3 @@
-
 # Step 2: Run the application
 FROM openjdk:17
 WORKDIR /app
@@ -10,4 +9,4 @@ COPY target/tpFoyer-17-0.0.1.jar /app/tpFoyer-17-0.0.1.jar
 EXPOSE 8082
 
 # Run the Spring Boot application
-ENTRYPOINT ["java", "-jar", "/app/tpFoyer-17.jar"]
+ENTRYPOINT ["java", "-jar", "/app/tpFoyer-17-0.0.1.jar"]
