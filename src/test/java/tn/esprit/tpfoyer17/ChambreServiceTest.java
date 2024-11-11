@@ -26,11 +26,10 @@ import java.util.Set;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
-
 @SpringBootTest
 
 public class ChambreServiceTest {
-/*
+
     @Autowired
     private ChambreRepository chambreRepository;
 
@@ -203,5 +202,5 @@ public class ChambreServiceTest {
         List<Chambre> chambresAffectees = chambreRepository.findByBlocIdBloc(bloc.getIdBloc());
         Assertions.assertEquals(2, chambresAffectees.size());
     }
-*/
+
 }
