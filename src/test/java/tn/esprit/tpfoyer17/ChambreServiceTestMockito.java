@@ -23,13 +23,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-/**
- * Classe de test unitaire pour le service Chambre, utilisant Mockito pour simuler le comportement du repository.
- */
-@SpringBootTest
 
-@ExtendWith(MockitoExtension.class)  // Extension de Mockito pour injecter les mocks automatiquement
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)  // Permet d'exécuter les tests dans un ordre spécifique
+
 public class ChambreServiceTestMockito {
 
     @Mock
@@ -41,10 +36,7 @@ public class ChambreServiceTestMockito {
     private Chambre chambre;  // Instance de chambre pour les tests
     private Bloc bloc;  // Instance de bloc pour les tests
 
-    /**
-     * Initialise les objets avant chaque test.
-     * Cette méthode est exécutée avant chaque test pour garantir un état cohérent.
-     */
+
     @BeforeEach
     public void setUp() {
         // Initialisation des objets pour chaque test
@@ -60,9 +52,7 @@ public class ChambreServiceTestMockito {
                 .build();
     }
 
-    /**
-     * Teste la récupération de toutes les chambres.
-     */
+
     @Test
     public void testRetrieveAllChambres() {
         // Simulation du comportement du repository

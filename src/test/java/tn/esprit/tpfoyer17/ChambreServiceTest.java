@@ -23,12 +23,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@ExtendWith(SpringExtension.class)
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
-@Slf4j
+
 @SpringBootTest
-@ActiveProfiles("test")
+
 public class ChambreServiceTest {
 
     @Autowired
