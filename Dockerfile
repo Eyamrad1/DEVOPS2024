@@ -5,7 +5,7 @@ FROM openjdk:8-jdk-alpine
 EXPOSE 8082
 
 # Copier le fichier JAR généré dans le conteneur
-# Assurez-vous que le fichier JAR se trouve dans le répertoire target
+# Assurez-vous que le fichier JAR se trouve dans le répertoire target avant de lancer la construction
 COPY target/tpFoyer-17-0.0.1.jar /tpFoyer-17-0.0.1.jar
 
 # Commande d'exécution de l'application Spring Boot
