@@ -5,7 +5,7 @@ FROM openjdk:8-jdk-alpine
 EXPOSE 8082
 
 # Copier le fichier JAR généré dans le conteneur
-ADD target/tpFoyer-17-1.0.jar tpFoyer-17-1.0.jar
+ADD target/tpFoyer-17-0.0.1.jar 
 
 # Commande d'exécution de l'application Spring Boot
 ENTRYPOINT ["java", "-jar", "/tpFoyer-17-1.0.jar"]
