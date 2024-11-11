@@ -55,9 +55,10 @@ class UniversiteServiceMockTest {
     void testAddUniversity() {
         // Arrange: Préparation de l'entité à ajouter
         Universite universite = new Universite();
+        // Act: Ajout de l'université
+
         when(universiteRepository.save(universite)).thenReturn(universite);
 
-        // Act: Ajout de l'université
         Universite result = universiteService.addUniversity(universite);
 
         // Assert: Vérification de l'ajout
@@ -70,9 +71,11 @@ class UniversiteServiceMockTest {
     void testUpdateUniversity() {
         // Arrange: Préparation de l'entité à mettre à jour
         Universite universite = new Universite();
-        when(universiteRepository.save(universite)).thenReturn(universite);
 
         // Act: Mise à jour de l'université
+
+        when(universiteRepository.save(universite)).thenReturn(universite);
+
         Universite result = universiteService.updateUniversity(universite);
 
         // Assert: Vérification de la mise à jour
@@ -85,9 +88,11 @@ class UniversiteServiceMockTest {
     void testRetrieveUniversity() {
         // Arrange: Préparation de l'entité et du mock pour le retrouver par ID
         Universite universite = new Universite();
-        when(universiteRepository.findById(1L)).thenReturn(Optional.of(universite));
 
         // Act: Récupération de l'université
+
+        when(universiteRepository.findById(1L)).thenReturn(Optional.of(universite));
+
         Universite result = universiteService.retrieveUniversity(1L);
 
         // Assert: Vérification de la récupération
@@ -100,9 +105,12 @@ class UniversiteServiceMockTest {
     void testDeleteUniversity() {
         // Arrange: Préparation du mock pour l'entité à supprimer
         Universite universite = new Universite();
-        when(universiteRepository.findById(1L)).thenReturn(Optional.of(universite));
 
         // Act: Suppression de l'université
+
+        
+        when(universiteRepository.findById(1L)).thenReturn(Optional.of(universite));
+
         universiteService.deleteUniversity(1L);
 
         // Assert: Vérification de la suppression
