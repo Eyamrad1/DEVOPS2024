@@ -1,11 +1,17 @@
 # Utiliser une image de base Java
 FROM openjdk:17-jdk-alpine
 
+# Variables pour Nexus
+ARG NEXUS_USERNAME=admin
+ARG NEXUS_PASSWORD=admin
+ARG NEXUS_URL=http://192.168.1.12:8081/repository/maven-releases/tn/esprit/tpFoyer-17/0.0.1/tpFoyer-17-0.0.1.jar
+
 # Définir le répertoire de travail
 WORKDIR /app
 
-# Copier le fichier JAR généré dans l'image Docker
-COPY target/tpFoyer-17-0.0.1.jar tpFoyer-17-0.0.1.jar
+# Installer wget et télécharger le fichier JAR depuis Nexus
+RUN apk add --no-cache wget && \
+    wget --user=$NEXUS_USERNAME --password=$NEXUS_PASSWORD -O tpFoyer-17-0.0.1.jar "$NEXUS_URL"
 
 # Exposer le port sur lequel l'application écoute
 EXPOSE 8082
