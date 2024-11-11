@@ -12,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import tn.esprit.tpfoyer17.entities.Bloc;
 import tn.esprit.tpfoyer17.entities.Foyer;
 import tn.esprit.tpfoyer17.entities.Universite;
+import tn.esprit.tpfoyer17.exceptions.ResourceNotFoundException;
 import tn.esprit.tpfoyer17.repositories.BlocRepository;
 import tn.esprit.tpfoyer17.repositories.FoyerRepository;
 import tn.esprit.tpfoyer17.repositories.UniversiteRepository;
@@ -73,12 +74,12 @@ class FoyerServiceTest {
     @Order(1)
     void testRetrieveAllFoyers() {
         // Act: Call the method under test
-        List<Foyer> foyers = foyerService.retrieveAllFoyers();
+        List<Foyer> foyersList = foyerService.retrieveAllFoyers();
 
         // Assert: Verify the result
-        assertNotNull(foyers);
-        assertTrue(foyers.size() > 0);
-        assertEquals("Foyer A", foyers.get(0).getNomFoyer());
+        assertNotNull(foyersList);
+        assertTrue(foyersList.size() > 0);
+        assertEquals("Foyer A", foyersList.get(0).getNomFoyer());
     }
 
     @Test
@@ -88,24 +89,24 @@ class FoyerServiceTest {
         Foyer newFoyer = new Foyer(2L, "New Foyer", 100, null, null);
 
         // Act: Add the new foyer
-        Foyer result = foyerService.addFoyer(newFoyer);
+        Foyer resultFoyer = foyerService.addFoyer(newFoyer);
 
         // Assert: Verify the result
-        assertNotNull(result);
-        assertEquals("New Foyer", result.getNomFoyer());
-        assertEquals(100, result.getCapaciteFoyer());
+        assertNotNull(resultFoyer);
+        assertEquals("New Foyer", resultFoyer.getNomFoyer());
+        assertEquals(100, resultFoyer.getCapaciteFoyer());
     }
 
     @Test
     @Order(3)
     void testUpdateFoyer() {
-        // Update the existing foyer with new values
+        // Arrange: Update the existing foyer with new values
         foyer.setNomFoyer("Updated Foyer");
 
         // Act: Update the foyer in the database
         Foyer updatedFoyer = foyerService.updateFoyer(foyer);
 
-        // Assert: Verify the updated name
+        // Assert: Verify the updated properties
         assertNotNull(updatedFoyer);
         assertEquals("Updated Foyer", updatedFoyer.getNomFoyer());
     }
@@ -121,11 +122,6 @@ class FoyerServiceTest {
         assertEquals("Foyer A", retrievedFoyer.getNomFoyer());
     }
 
-
-
-
-
-
     @Test
     @Order(5)
     void testFoyerAndBlocRelationship() {
@@ -134,4 +130,36 @@ class FoyerServiceTest {
         assertNotNull(savedBloc);
         assertEquals(foyer.getIdFoyer(), savedBloc.getFoyer().getIdFoyer());
     }
+
+    
+
+    @Test
+    @Order(7)
+    void testRemoveFoyer() {
+        // Arrange: Create and save a new Foyer
+        Foyer newFoyerToDelete = new Foyer(3L, "Foyer C", 200, null, null);
+        newFoyerToDelete = foyerRepository.save(newFoyerToDelete);
+
+        // Act: Call the method to remove the foyer
+        foyerService.removeFoyer(newFoyerToDelete.getIdFoyer());
+
+        // Assert: Verify that the foyer has been deleted
+        Foyer deletedFoyer = foyerRepository.findById(newFoyerToDelete.getIdFoyer()).orElse(null);
+        assertNull(deletedFoyer);
+    }
+
+    @Test
+    @Order(8)
+    void testAddFoyerWithNull() {
+        // Act & Assert: Trying to add a null Foyer should throw an exception
+        assertThrows(IllegalArgumentException.class, () -> foyerService.addFoyer(null));
+    }
+
+    @Test
+    @Order(9)
+    void testRetrieveFoyerNotFound() {
+        // Act & Assert: Trying to retrieve a non-existing Foyer should throw a ResourceNotFoundException
+        assertThrows(ResourceNotFoundException.class, () -> foyerService.retrieveFoyer(999L)); // Assuming 999L doesn't exist
+    }
+
 }

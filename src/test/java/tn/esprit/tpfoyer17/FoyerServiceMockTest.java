@@ -11,7 +11,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import tn.esprit.tpfoyer17.entities.Bloc;
 import tn.esprit.tpfoyer17.entities.Foyer;
+import tn.esprit.tpfoyer17.entities.Universite;
 import tn.esprit.tpfoyer17.repositories.BlocRepository;
 import tn.esprit.tpfoyer17.repositories.FoyerRepository;
 import tn.esprit.tpfoyer17.repositories.UniversiteRepository;
@@ -19,7 +21,9 @@ import tn.esprit.tpfoyer17.services.impementations.FoyerService;
 import tn.esprit.tpfoyer17.exceptions.ResourceNotFoundException;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -150,6 +154,39 @@ class FoyerServiceMockTest {
         // Assert
         verify(foyerRepository, times(1)).deleteById(1L);
     }
+    @Test
+    void testAjouterFoyerEtAffecterAUniversite() {
+        // Arrange
+        Foyer foyer = new Foyer();
+        Universite universite = new Universite();
+        universite.setIdUniversite(1L);
+        foyer.setIdFoyer(1L);
+
+        // Creating and setting the bloc
+        Bloc bloc1 = new Bloc();
+        bloc1.setNomBloc("Bloc1");  // Providing a name for the Bloc
+
+        // Using a Set instead of a List
+        Set<Bloc> blocs = new HashSet<>();
+        blocs.add(bloc1);
+        foyer.setBlocs(blocs);
+
+        // Mock repository behaviors
+        when(universiteRepository.findById(1L)).thenReturn(Optional.of(universite));
+        when(foyerRepository.save(any(Foyer.class))).thenReturn(foyer);
+        when(blocRepository.save(any(Bloc.class))).thenReturn(bloc1);
+
+        // Act
+        Foyer result = foyerService.ajouterFoyerEtAffecterAUniversite(foyer, 1L);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(foyer, result);
+        verify(universiteRepository, times(1)).save(universite); // Ensure that universite is saved
+        verify(blocRepository, times(1)).save(bloc1); // Ensure that bloc is saved
+        verify(foyerRepository, times(1)).save(foyer); // Ensure that foyer is saved
+    }
+
 
     @Test
     void testRemoveFoyer_Exception() {
