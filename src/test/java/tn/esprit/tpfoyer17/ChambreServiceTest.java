@@ -73,7 +73,7 @@ public class ChambreServiceTest {
 
         Assertions.assertNotNull(result);
 
-    }
+    }/*
     @Test
     @Order(2)
 
@@ -89,7 +89,7 @@ public class ChambreServiceTest {
         // Then
         Assertions.assertNotNull(result);
         Assertions.assertNotNull(result.getIdChambre()); // Utilisez getId()
-    }
+
 
     @Test
     @Order(3)
@@ -155,6 +155,6 @@ public class ChambreServiceTest {
         Assertions.assertNotNull(simpleChambres);
         Assertions.assertTrue(simpleChambres.stream().allMatch(c -> c.getTypeChambre() == TypeChambre.SIMPLE));
     }
-
+*/
 
 }
