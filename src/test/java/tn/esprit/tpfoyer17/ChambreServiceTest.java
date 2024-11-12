@@ -28,7 +28,7 @@ import java.util.Set;
 
 @SpringBootTest
 
-public class ChambreServiceTest {/*
+public class ChambreServiceTest {
     @Autowired
     private ChambreService chambreService;
 
@@ -72,7 +72,8 @@ public class ChambreServiceTest {/*
         // Then
 
         Assertions.assertNotNull(result);
-
+        chambreRepository.delete(chambre1);
+        chambreRepository.delete(chambre2);
     }/*
     @Test
     @Order(2)
@@ -90,7 +91,7 @@ public class ChambreServiceTest {/*
         Assertions.assertNotNull(result);
         Assertions.assertNotNull(result.getIdChambre()); // Utilisez getId()
 
-
+    }
     @Test
     @Order(3)
     void testUpdateChambre() {
