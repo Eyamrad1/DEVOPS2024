@@ -1,12 +1,11 @@
-# Utiliser l'image officielle de Java 8 légère basée sur Alpine
-FROM openjdk:8-jdk-alpine
+# Utilise une image OpenJDK 17 légère pour le runtime
+FROM openjdk:17-jdk-alpine
 
-# Exposer le port sur lequel l'application écoute (ici, 8082 est le port par défaut pour Spring Boot)
+# Spécifie le port sur lequel l'application va écouter
 EXPOSE 8082
 
-# Copier le fichier JAR généré dans le conteneur
-# Assurez-vous que le fichier JAR se trouve dans le répertoire target avant de lancer la construction
-COPY target/tpFoyer-17-0.0.1.jar /tpFoyer-17-0.0.1.jar
+# Copie le fichier .jar généré dans l'image Docker
+ADD target/tpFoyer-17-0.0.1.jar tpFoyer-17-0.0.1.jar
 
-# Commande d'exécution de l'application Spring Boot
+# Définit le point d'entrée pour lancer l'application
 ENTRYPOINT ["java", "-jar", "/tpFoyer-17-0.0.1.jar"]
