@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  backend:
+    image: ${DOCKER_REGISTRY}/${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
+    container_name: tpfoyer-backend
+    ports:
+      - "8082:8082"  # Mapping des ports pour le backend
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/devops?&createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=rootpassword  # Le mot de passe de la base de données MySQL
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update  # Hibernate settings
+      - SPRING_JPA_SHOW_SQL=true  # Show SQL in the logs
+    depends_on:
+      - mysql
+    networks:
+      - tpfoyer-network
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: devops
+    ports:
+      - "3306:3306"  # Mapping des ports pour MySQL
+    volumes:
+      - mysql-data:/var/lib/mysql  # Persistance des données
+    networks:
+      - tpfoyer-network
+
+volumes:
+  mysql-data:
+
+networks:
+  tpfoyer-network:
+    driver: bridge
