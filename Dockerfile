@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-alpine
 EXPOSE 8082
 
 # Copie le fichier .jar généré dans l'image Docker
-ADD target/tpFoyer-17-0.0.1.jar tpFoyer-17-0.0.1.jar
+ADD target/tpFoyer-17-2.4.jar tpFoyer-17-2.4.jar
 
 # Définit le point d'entrée pour lancer l'application
-ENTRYPOINT ["java", "-jar", "/tpFoyer-17-0.0.1.jar"]
+ENTRYPOINT ["java", "-jar", "/tpFoyer-17-2.4.jar"]
