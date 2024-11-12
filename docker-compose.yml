@@ -14,6 +14,7 @@ services:
       - mysql_data:/var/lib/mysql  # Persistance des données
 
   springboot-container:
+    image: aminelahmer1/devops2024
     build:
       context: .  # Utiliser le Dockerfile dans le répertoire actuel
       dockerfile: Dockerfile
