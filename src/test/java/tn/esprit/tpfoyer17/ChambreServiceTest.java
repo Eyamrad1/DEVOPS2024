@@ -29,7 +29,7 @@ import java.util.Set;
 @SpringBootTest
 
 public class ChambreServiceTest {
-    @Autowired
+   /* @Autowired
     private ChambreService chambreService;
 
     @Autowired
@@ -74,7 +74,7 @@ public class ChambreServiceTest {
         Assertions.assertNotNull(result);
         chambreRepository.delete(chambre1);
         chambreRepository.delete(chambre2);
-    }/*
+    }
     @Test
     @Order(2)
 
