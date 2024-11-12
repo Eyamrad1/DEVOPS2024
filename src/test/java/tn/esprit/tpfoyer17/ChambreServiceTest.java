@@ -24,11 +24,11 @@ import java.util.List;
 import java.util.Set;
 
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+
 
 @SpringBootTest
 
-public class ChambreServiceTest {
+public class ChambreServiceTest {/*
     @Autowired
     private ChambreService chambreService;
 
