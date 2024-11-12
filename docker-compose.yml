@@ -30,8 +30,23 @@ services:
     networks:
       - tpfoyer-network
 
+  grafana:
+    image: grafana/grafana:latest  # Utilisation de l'image Grafana officielle
+    container_name: tpfoyer-grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin  # Définir le mot de passe administrateur
+    ports:
+      - "3000:3000"  # Mapping des ports pour Grafana (accès à l'interface web sur http://localhost:3000)
+    depends_on:
+      - mysql  # Grafana pourrait dépendre de MySQL ou d'autres services de monitoring
+    networks:
+      - tpfoyer-network
+    volumes:
+      - grafana-data:/var/lib/grafana  # Persistance des données Grafana
+
 volumes:
   mysql-data:
+  grafana-data:
 
 networks:
   tpfoyer-network:
