@@ -106,38 +106,33 @@
                 <version>4.0.0.4121</version>
 
             </plugin>
-
-            <!-- Jacoco plugin -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.12</version>
+                <version>0.8.7</version>
                 <executions>
+                    <!-- Step 2.1: Set up the agent before tests are run -->
                     <execution>
                         <id>jacoco-initialize</id>
-                        <phase>test</phase>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
+                        <configuration>
+                            <destFile>${project.build.directory}/jacoco.exec</destFile>
+                            <propertyName>jacoco-agent.argLine</propertyName>
+                        </configuration>
+                        <phase>validate</phase>
                     </execution>
+                    <!-- Step 2.2: Generate report after tests are complete -->
                     <execution>
-                        <id>jacoco-site</id>
-                        <phase>package</phase>
+                        <id>jacoco-report</id>
                         <goals>
                             <goal>report</goal>
                         </goals>
-                    </execution>
-
-                    <execution>
-                        <id>jacoco-report-aggregate</id>
-                        <goals>
-                            <goal>report-aggregate</goal>
-                        </goals>
+                        <phase>verify</phase>
                     </execution>
                 </executions>
             </plugin>
-
-                <!-- JaCoCo Plugin for Code Coverage -->
 
 
             <!-- Surefire Plugin for Unit Tests -->
@@ -146,19 +141,13 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
-                    <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+                    <!-- Directly specify the JaCoCo agent in the argLine -->
+                    <argLine>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${project.build.directory}/jacoco.exec</argLine>
                 </configuration>
             </plugin>
 
-            <!-- Maven Surefire plugin for tests -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
-                <configuration>
-                    <skipTests>false</skipTests>
-                </configuration>
-            </plugin>
+
+
         </plugins>
     </build>
 
