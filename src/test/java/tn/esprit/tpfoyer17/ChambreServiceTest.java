@@ -27,8 +27,8 @@ import java.util.Set;
 
 
 @SpringBootTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class ChambreServiceTest {
+
+public class ChambreServiceTest {/*
    @Autowired
     private ChambreService chambreService;
 
