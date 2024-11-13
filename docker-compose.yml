@@ -6,10 +6,13 @@ services:
   mysql-container:
     image: mysql:8
     environment:
+
       MYSQL_ROOT_PASSWORD: rootpassword  # Définir le mot de passe du root
       MYSQL_DATABASE: tpFoyer17  # Créer la base de données tpFoyer17
     ports:
       - "3306:3306"  # Exposer le port MySQL
+    networks:
+      - foyerr
     volumes:
       - mysql_data:/var/lib/mysql  # Persistance des données
 
@@ -24,8 +27,25 @@ services:
       SPRING_DATASOURCE_PASSWORD: rootpassword  # Mot de passe du root
     ports:
       - "8082:8081"  # Exposer le port Spring Boot
+    networks:
+      - foyerr
     depends_on:
       - mysql-container  # Attendre que MySQL démarre avant Spring Boot
+
+
+  angularfoyer-container:
+    image: aminelahmer1/tpfoyer_front_image
+    ports:
+      - "80:80"
+    networks:
+      - foyerr
+
+    depends_on:
+      - mysql-container
+      - springboot-container
+networks:
+  foyerr:
+
 
 volumes:
   mysql_data:  # Volume persistant pour MySQL
