@@ -22,7 +22,7 @@ public class Chambre implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Setter(AccessLevel.NONE)
+
     long idChambre;
 
     long numeroChambre;

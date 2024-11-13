@@ -27,9 +27,9 @@ import java.util.Set;
 
 
 @SpringBootTest
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ChambreServiceTest {
-   /* @Autowired
+   @Autowired
     private ChambreService chambreService;
 
     @Autowired
@@ -106,7 +106,7 @@ public class ChambreServiceTest {
         // Then
         Assertions.assertEquals(TypeChambre.DOUBLE, result.getTypeChambre());
     }
-
+/*
     @Test
     @Order(4)
     void testRetrieveChambre() {
