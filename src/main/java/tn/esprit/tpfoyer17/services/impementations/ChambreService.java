@@ -47,6 +47,11 @@ public class ChambreService implements IChambreService {
     }
 
     @Override
+    public void removeChambre(long idChambre) {
+         chambreRepository.deleteById(idChambre);
+    }
+
+    @Override
     public List<Chambre> findByTypeChambre() {
         return chambreRepository.findByTypeChambreAndReservationsEstValide(TypeChambre.DOUBLE, true);
     }

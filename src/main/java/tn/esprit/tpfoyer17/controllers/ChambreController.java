@@ -37,7 +37,10 @@ public class ChambreController {
     public Chambre retrieveChambre(@PathVariable("idChambre") long idChambre) {
         return chambreService.retrieveChambre(idChambre);
     }
-
+    @DeleteMapping("/removeChambre/{idChambre}")
+    public void removeChambre(@PathVariable("idChambre") long idChambre) {
+        chambreService.removeChambre(idChambre);
+    }
     @GetMapping("/findByTypeChambre")
     public List<Chambre> findByTypeChambre() {
         return chambreService.findByTypeChambre();

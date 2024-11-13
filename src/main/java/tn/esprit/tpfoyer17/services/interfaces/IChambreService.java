@@ -12,7 +12,7 @@ public interface IChambreService {
     Chambre addChambre(Chambre c); // ajouter l’équipe avec son détail
     Chambre updateChambre (Chambre c);
     Chambre retrieveChambre (long idChambre);
-
+    void removeChambre(long idChambre);
     List<Chambre> findByTypeChambre();
     public Bloc affecterChambresABloc(List<Long> numChambre, long idBloc) ;
     public List<Chambre>  getChambresParNomUniversite( String nomUniversite) ;
