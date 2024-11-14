@@ -1,15 +1,9 @@
 package tn.esprit.tpfoyer17;
 
 import jakarta.persistence.EntityNotFoundException;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import tn.esprit.tpfoyer17.entities.Bloc;
 import tn.esprit.tpfoyer17.entities.Chambre;
 import tn.esprit.tpfoyer17.entities.enumerations.TypeChambre;
@@ -18,147 +12,152 @@ import tn.esprit.tpfoyer17.repositories.ChambreRepository;
 import tn.esprit.tpfoyer17.repositories.UniversiteRepository;
 import tn.esprit.tpfoyer17.services.impementations.ChambreService;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-
-
+import java.util.Optional;
 
 @SpringBootTest
 
 public class ChambreServiceTest {/*
-
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-
-   @Autowired
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    @Autowired
     private ChambreService chambreService;
 
     @Autowired
     private ChambreRepository chambreRepository;
 
-    @Autowired
-    private BlocRepository blocRepository;
-
-    @Autowired
-    private UniversiteRepository universiteRepository;
-
-
-
-
-
-
-    // Builder pour Chambre
     private Chambre createChambre(TypeChambre typeChambre) {
         return Chambre.builder()
                 .typeChambre(typeChambre)
                 .build();
     }
 
-    // Builder pour Bloc
-
-
     @Test
     @Order(1)
     void testRetrieveAllChambres() {
-        // Given
-
+        // Arrange
         Chambre chambre1 = createChambre(TypeChambre.SIMPLE);
         Chambre chambre2 = createChambre(TypeChambre.DOUBLE);
         chambreRepository.save(chambre1);
         chambreRepository.save(chambre2);
 
-        // When
+        // Act
         List<Chambre> result = chambreService.retrieveAllChambres();
 
-        // Then
+        // Assert
+        Assertions.assertNotNull(result, "The result should not be null");
+        Assertions.assertTrue(result.size() >= 2, "The result should contain at least 2 chambres");
 
-        Assertions.assertNotNull(result);
-        chambreRepository.delete(chambre1);
-        chambreRepository.delete(chambre2);
+        // Clean up
+        chambreRepository.deleteAll(List.of(chambre1, chambre2));
     }
+
     @Test
     @Order(2)
-
     void testAddChambre() {
-        // Given
+        // Arrange
+        Chambre chambre = createChambre(TypeChambre.SIMPLE);
 
-        Chambre chambre = new Chambre();
-        chambre.setTypeChambre(TypeChambre.SIMPLE);
-
-        // When
+        // Act
         Chambre result = chambreService.addChambre(chambre);
 
-        // Then
-        Assertions.assertNotNull(result);
-        Assertions.assertNotNull(result.getIdChambre()); // Utilisez getId()
+        // Assert
+        Assertions.assertNotNull(result, "The saved chambre should not be null");
+        Assertions.assertNotNull(result.getIdChambre(), "The saved chambre should have a non-null ID");
+        Assertions.assertEquals(TypeChambre.SIMPLE, result.getTypeChambre(), "The type of chambre should be SIMPLE");
 
+        // Clean up
+        chambreRepository.delete(result);
     }
+
     @Test
     @Order(3)
     void testUpdateChambre() {
-        // Given
+        // Arrange
         Chambre chambre = createChambre(TypeChambre.SIMPLE);
         Chambre savedChambre = chambreRepository.save(chambre);
-        savedChambre.setTypeChambre(TypeChambre.DOUBLE); // Modification
 
-        // When
+        // Act
+        savedChambre.setTypeChambre(TypeChambre.DOUBLE);
         Chambre result = chambreService.updateChambre(savedChambre);
 
-        // Then
-        Assertions.assertEquals(TypeChambre.DOUBLE, result.getTypeChambre());
+        // Assert
+        Assertions.assertNotNull(result, "The updated chambre should not be null");
+        Assertions.assertEquals(TypeChambre.DOUBLE, result.getTypeChambre(), "The type of chambre should be updated to DOUBLE");
+
+        // Clean up
+        chambreRepository.delete(result);
     }
-/*
+
     @Test
     @Order(4)
-    void testRetrieveChambre() {
-        // Given
+    void testRemoveChambre() {
+        // Arrange
         Chambre chambre = createChambre(TypeChambre.SIMPLE);
         Chambre savedChambre = chambreRepository.save(chambre);
 
-        // When
-        Chambre result = chambreService.retrieveChambre(savedChambre.getIdChambre()); // Utilisez getId()
+        // Act
+        chambreService.removeChambre(savedChambre.getIdChambre());
 
-        // Then
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(savedChambre.getIdChambre(), result.getIdChambre()); // Utilisez getId()
+        // Assert
+        Assertions.assertFalse(chambreRepository.existsById(savedChambre.getIdChambre()), "The chambre should no longer exist in the repository");
     }
-
-
 
     @Test
     @Order(5)
     void testUpdateChambreType() {
-        // Given
+        // Arrange
         Chambre chambre = createChambre(TypeChambre.SIMPLE);
         Chambre savedChambre = chambreRepository.save(chambre);
 
-        // When
+        // Act
         savedChambre.setTypeChambre(TypeChambre.DOUBLE);
         Chambre updatedChambre = chambreService.updateChambre(savedChambre);
 
-        // Then
-        Assertions.assertEquals(TypeChambre.DOUBLE, updatedChambre.getTypeChambre());
+        // Assert
+        Assertions.assertNotNull(updatedChambre, "The updated chambre should not be null");
+        Assertions.assertEquals(TypeChambre.DOUBLE, updatedChambre.getTypeChambre(), "The type of chambre should be DOUBLE");
+
+        // Clean up
+        chambreRepository.delete(updatedChambre);
     }
-
-
-
-
 
     @Test
     @Order(6)
-    void testFindByTypeChambre() {
+
+
+    void testRetrieveChambreById() {
+        // Arrange
+        Chambre chambre = createChambre(TypeChambre.SIMPLE);
+        Chambre savedChambre = chambreRepository.save(chambre);
+
+        // Act
+        Chambre foundChambre = chambreService.retrieveChambre(savedChambre.getIdChambre());
+
+        // Assert
+        Assertions.assertNotNull(foundChambre, "The chambre retrieved by ID should not be null");
+        Assertions.assertEquals(savedChambre.getIdChambre(), foundChambre.getIdChambre(),
+                "The ID of the retrieved chambre should match the saved chambre ID");
+
+        // Clean up
+        chambreRepository.delete(savedChambre);
+    }
+
+
+    @Test
+    @Order(7)
+    void testRetrieveChambresCount() {
+        // Arrange
         Chambre chambre1 = createChambre(TypeChambre.SIMPLE);
         Chambre chambre2 = createChambre(TypeChambre.DOUBLE);
-        chambreRepository.save(chambre1);
-        chambreRepository.save(chambre2);
+        chambreRepository.saveAll(List.of(chambre1, chambre2));
 
-        List<Chambre> simpleChambres = chambreService.findByTypeChambre();
+        // Act
+        long count = chambreService.retrieveAllChambres().size();
 
-        Assertions.assertNotNull(simpleChambres);
-        Assertions.assertTrue(simpleChambres.stream().allMatch(c -> c.getTypeChambre() == TypeChambre.SIMPLE));
+        // Assert
+        Assertions.assertTrue(count >= 2, "The chambre count should be at least 2");
+
+        // Clean up
+        chambreRepository.deleteAll(List.of(chambre1, chambre2));
     }
-*/
-
-}
+*/}
