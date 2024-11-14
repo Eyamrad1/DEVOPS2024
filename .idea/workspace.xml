@@ -6,11 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="4c524f78-7960-421f-a54a-b712ab56c1e2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tn/esprit/tpfoyer17/ReservationTest/MochitoReservationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tn/esprit/tpfoyer17/ReservationTest/MochitoReservationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -67,6 +75,7 @@
       <workItem from="1731593936687" duration="17000" />
       <workItem from="1731594273914" duration="6428000" />
       <workItem from="1731612484625" duration="2079000" />
+      <workItem from="1731614575649" duration="2471000" />
     </task>
     <servers />
   </component>
