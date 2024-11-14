@@ -12,7 +12,7 @@ services:
       - mysql_data:/var/lib/mysql  # Persist MySQL data
 
   springboot-container:
-    image: mradeya/tpfoyer:2.4 # Use the custom Docker image 'mradeya/tpfoyer'
+    image: abdessalem58/devops:2.4 # Use the custom Docker image 'abdessalem58/devops'
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/tpFoyer17  # Database connection URL
       SPRING_DATASOURCE_USERNAME: root  # Root user for connection
