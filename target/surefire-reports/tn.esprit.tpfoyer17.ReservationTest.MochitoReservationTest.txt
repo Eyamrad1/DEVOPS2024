@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: tn.esprit.tpfoyer17.ReservationTest.MochitoReservationTest
 -------------------------------------------------------------------------------
-Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.86 s - in tn.esprit.tpfoyer17.ReservationTest.MochitoReservationTest
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.599 s - in tn.esprit.tpfoyer17.ReservationTest.MochitoReservationTest
