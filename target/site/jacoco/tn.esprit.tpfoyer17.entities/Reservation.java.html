@@ -12,9 +12,9 @@ import java.util.Set;
 
 @Entity
 @Getter
-<span class="pc" id="L15">@Setter</span>
+<span class="nc" id="L15">@Setter</span>
 <span class="fc" id="L16">@AllArgsConstructor</span>
-<span class="fc" id="L17">@NoArgsConstructor</span>
+<span class="nc" id="L17">@NoArgsConstructor</span>
 <span class="pc" id="L18">@Builder</span>
 <span class="nc" id="L19">@ToString</span>
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -26,7 +26,7 @@ public class Reservation implements Serializable {
 
 <span class="nc" id="L27">    LocalDate anneeUniversitaire;</span>
 
-<span class="fc" id="L29">    boolean estValide;</span>
+<span class="nc" id="L29">    boolean estValide;</span>
 
     @ToString.Exclude
     @ManyToMany
