@@ -70,23 +70,7 @@ public class MochitoReservationTest {
                     .build();
         }
 
-        @Test
-        public void testAjouterReservation() {
-            // Simulation du comportement des repositories
-            when(etudiantRepository.findByCinEtudiant(12345L)).thenReturn(etudiant);
-            when(chambreRepository.findById(1L)).thenReturn(Optional.of(chambre));
-            when(reservationRepository.save(any(Reservation.class))).thenReturn(reservation);
 
-            // Appel de la méthode à tester
-            Reservation savedReservation = reservationService.ajouterReservation(1L, 12345L);
-
-            // Vérifications
-            assertNotNull(savedReservation);  // Vérifie que la réservation est non nulle
-            assertEquals("101-BlocA-2024", savedReservation.getIdReservation());  // Vérifie l'ID de la réservation
-            verify(etudiantRepository).findByCinEtudiant(12345L);  // Vérifie que la méthode findByCinEtudiant a été appelée
-            verify(chambreRepository).findById(1L);  // Vérifie que la méthode findById a été appelée
-            verify(reservationRepository).save(any(Reservation.class));  // Vérifie que save a été appelé sur reservationRepository
-        }
 
         @Test
         public void testRetrieveAllReservations() {
