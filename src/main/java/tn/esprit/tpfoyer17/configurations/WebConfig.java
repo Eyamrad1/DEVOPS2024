@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")  // Applique CORS à toutes les routes sous /tpFoyer17/api/
-                .allowedOrigins("http://192.168.1.12")  // Autoriser l'application Angular
+                .allowedOrigins("http://192.168.1.12:8082")  // Autoriser l'application Angular
                 .allowedMethods("GET", "POST", "PUT", "DELETE" , "OPTIONS")  // Méthodes autorisées
                 .allowedHeaders("*")
                 .allowCredentials(true);  // Autorise tous les headers

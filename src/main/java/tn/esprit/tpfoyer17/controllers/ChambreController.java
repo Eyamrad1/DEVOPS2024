@@ -16,10 +16,12 @@ import java.util.List;
 @AllArgsConstructor
 @Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@CrossOrigin(origins = "http://192.168.1.12:8082")
 @RequestMapping("api/chambres")
-@CrossOrigin(origins = "http://192.168.1.12")
+
 
 public class ChambreController {
+
     @GetMapping("/retrieveAllChambres")
     public List<Chambre> retrieveAllChambres() {
         return chambreService.retrieveAllChambres();
@@ -39,6 +41,7 @@ public class ChambreController {
     public Chambre retrieveChambre(@PathVariable("idChambre") long idChambre) {
         return chambreService.retrieveChambre(idChambre);
     }
+
     @DeleteMapping("/removeChambre/{idChambre}")
     public void removeChambre(@PathVariable("idChambre") long idChambre) {
         chambreService.removeChambre(idChambre);

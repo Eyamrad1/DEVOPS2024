@@ -1,0 +1,6 @@
+projectKey=Devops2024
+serverUrl=http://192.168.1.12:9000
+serverVersion=10.7.0.96327
+dashboardUrl=http://192.168.1.12:9000/dashboard?id=Devops2024
+ceTaskId=75e7177f-f010-4687-b832-a84ab46cb185
+ceTaskUrl=http://192.168.1.12:9000/api/ce/task?id=75e7177f-f010-4687-b832-a84ab46cb185
