@@ -80,6 +80,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
         <!-- Optional: Mockito Core, specify version if needed -->
         <dependency>
             <groupId>org.mockito</groupId>
