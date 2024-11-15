@@ -19,6 +19,7 @@ import tn.esprit.tpfoyer17.repositories.UniversiteRepository;
 import tn.esprit.tpfoyer17.services.impementations.FoyerService;
 
 
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,6 +34,8 @@ class FoyerServiceTest {
 
     @Autowired
     private FoyerService foyerService;
+
+
 
     @Autowired
     private FoyerRepository foyerRepository;
@@ -130,6 +133,10 @@ class FoyerServiceTest {
         assertNotNull(savedBloc);
         assertEquals(foyer.getIdFoyer(), savedBloc.getFoyer().getIdFoyer());
     }
+
+
+
+
 
 
 

@@ -144,6 +144,50 @@ class FoyerServiceMockTest {
     }
 
     @Test
+    void testAjouterFoyerEtAffecterAUniversite_EmptyBlocs() {
+        // Arrange
+        Foyer foyer = new Foyer();
+        Universite universite = new Universite();
+        universite.setIdUniversite(1L);
+        foyer.setBlocs(new HashSet<>()); // No blocs
+
+        when(universiteRepository.findById(1L)).thenReturn(Optional.of(universite));
+        when(foyerRepository.save(any(Foyer.class))).thenReturn(foyer);
+
+        // Act
+        Foyer result = foyerService.ajouterFoyerEtAffecterAUniversite(foyer, 1L);
+
+        // Assert
+        assertNotNull(result);
+        assertTrue(result.getBlocs().isEmpty());
+        verify(universiteRepository, times(1)).save(universite);
+        verify(foyerRepository, times(1)).save(foyer);
+    }
+    @Test
+    void testRetrieveAllFoyers_MultipleValues() {
+        // Arrange
+        Foyer foyer1 = new Foyer();
+        foyer1.setIdFoyer(1L);
+        foyer1.setNomFoyer("Foyer1");
+
+        Foyer foyer2 = new Foyer();
+        foyer2.setIdFoyer(2L);
+        foyer2.setNomFoyer("Foyer2");
+
+        when(foyerRepository.findAll()).thenReturn(Arrays.asList(foyer1, foyer2));
+
+        // Act
+        var foyers = foyerService.retrieveAllFoyers();
+
+        // Assert
+        assertNotNull(foyers);
+        assertEquals(2, foyers.size());
+        assertEquals("Foyer1", foyers.get(0).getNomFoyer());
+        assertEquals("Foyer2", foyers.get(1).getNomFoyer());
+    }
+
+
+    @Test
     void testRemoveFoyer() {
         // Arrange
         doNothing().when(foyerRepository).deleteById(1L);
@@ -215,4 +259,8 @@ class FoyerServiceMockTest {
         assertEquals(1, foyers.size());
         assertEquals("Foyer1", foyers.get(0).getNomFoyer());
     }
+
+
+
+
 }
