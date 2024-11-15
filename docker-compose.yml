@@ -18,7 +18,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root  # Root user for connection
       SPRING_DATASOURCE_PASSWORD: rootpassword  # Root password
     ports:
-      - "8084:8082"  # Expose Spring Boot application port
+      - "8082:8082"  # Expose Spring Boot application port
     depends_on:
       - mysql-container  # Wait for MySQL to start before Spring Boot
 
