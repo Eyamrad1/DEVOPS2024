@@ -61,7 +61,7 @@ This project demonstrates a complete DevOps pipeline for a Spring Boot applicati
 ![Capture d'écran 2024-11-17 112946](https://github.com/user-attachments/assets/69c12715-2b5b-427e-85c7-abbe58cb9984)
 ![Capture d'écran 2024-11-17 112705](https://github.com/user-attachments/assets/e3153179-98a6-41bf-bd5d-f28df6b96413)
 ![Capture d'écran 2024-11-17 112718](https://github.com/user-attachments/assets/6b6307da-c84a-4fbf-bf33-e71e2cc24f6c)
-![Capture d'écran 2024-11-17 112220](https://github.com/user-attachments/assets/f6f7d6be-3764-464c-9436-f55fa04d8696)
+
 
 
 
